@@ -18,7 +18,7 @@ game_over = True
 
 while game_over:
     #obtener la tasa de refresco en milisegundos
-    valor_tasa = tasa_refresco.tick(300)#variable para controlar la velocidad entre fotogramas
+    valor_tasa = tasa_refresco.tick(350)#variable para controlar la velocidad entre fotogramas
     #print(valor_tasa)
 
     for evento in pg.event.get():
@@ -26,18 +26,11 @@ while game_over:
             game_over = False
 
 
-    estado_teclado = pg.key.get_pressed()
-    #print("estado teclado: ",estado_teclado[pg.K_UP] )
-
-    if estado_teclado[pg.K_UP] == True:
-        raqueta1.pos_y -= 1
-
-    if estado_teclado[pg.K_DOWN] == True:
-        raqueta1.pos_y += 1    
-
     pantalla_principal.fill( ( 27, 149, 47 ) )
-
     pg.draw.line(pantalla_principal, (255,255,255), (400,0), (400,600), width=10)
+
+    raqueta1.mover(pg.K_w,pg.K_s)
+    raqueta2.mover(pg.K_UP,pg.K_DOWN)
 
     pelota.dibujar(pantalla_principal)
     raqueta1.dibujar(pantalla_principal) 
