@@ -1,7 +1,8 @@
 import pygame as pg
+from .utils import *
 
 class Raqueta:
-    def __init__(self,pos_x, pos_y,color=(255,255,255),w=20,h=120):
+    def __init__(self,pos_x, pos_y,color=COLOR_BLANCO,w=20,h=120):
         self.pos_x = pos_x
         self.pos_y = pos_y
         self.color = color
@@ -11,7 +12,7 @@ class Raqueta:
     def dibujar(self,surface):
        pg.draw.rect(surface,self.color,(self.pos_x-(self.w//2), self.pos_y-(self.h//2) ,self.w,self.h) )
 
-    def mover(self,teclado_arriba,teclado_abajo,y_max=600,y_min=0):
+    def mover(self,teclado_arriba,teclado_abajo,y_max=ALTO,y_min=ALTO_MIN):
         estado_teclado = pg.key.get_pressed()
 
         if estado_teclado[teclado_arriba] == True and self.pos_y > y_min+(self.h//2):
@@ -40,7 +41,7 @@ class Raqueta:
 
 
 class Pelota:
-    def __init__(self,pos_x, pos_y,color=(255,255,255),radio=5,vx=1,vy=1):
+    def __init__(self,pos_x, pos_y,color=COLOR_BLANCO,radio=15,vx=1,vy=1):
         self.pos_x = pos_x
         self.pos_y = pos_y
         self.color = color
@@ -75,11 +76,15 @@ class Pelota:
             self.vy *=-1
 
     def mostrar_marcador(self,pantalla):
-        fuente = pg.font.Font(None,30)
-        marcador1 = fuente.render(str(self.contadorDerecho),True,(255,255,255))
-        marcador2 = fuente.render(str(self.contadorIzquierdo),True,(255,255,255))
-        pantalla.blit(marcador1,(350,50))
-        pantalla.blit(marcador2,(450,50))
+        fuente = pg.font.Font(None,40)
+        marcador1 = fuente.render(str(self.contadorDerecho),True,COLOR_NARANJA)
+        marcador2 = fuente.render(str(self.contadorIzquierdo),True,COLOR_NARANJA)
+        jugador1 = fuente.render("Jugador 1",True,COLOR_AZUL)
+        jugador2 = fuente.render("Jugador 2",True,COLOR_AZUL)
+        pantalla.blit(jugador1,(210,20))
+        pantalla.blit(jugador2,(510,20))
+        pantalla.blit(marcador1,(250,50))
+        pantalla.blit(marcador2,(550,50))
 
     @property
     def derecha(self):

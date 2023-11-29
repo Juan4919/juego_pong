@@ -1,5 +1,10 @@
+"""
 from figura_class import Raqueta,Pelota
+from pantallas import Partida
 
+juego=Partida()
+juego.bucle_fotograma()
+"""
 """
 objetoRaqueta = Raqueta(0,500)
 
@@ -14,7 +19,7 @@ print( objetoPelota.derecha )
 print( objetoPelota.izquierda )
 print( objetoPelota.arriba )
 print( objetoPelota.abajo )
-"""
+
 
 def datosPersonales(*parametros):
     for datos in parametros:
@@ -22,3 +27,4 @@ def datosPersonales(*parametros):
 
 
 datosPersonales("Jose","Martinez",25,True,[1,2,3])
+"""
