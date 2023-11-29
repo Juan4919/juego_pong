@@ -9,15 +9,15 @@ class Raqueta:
         self.h = h
 
     def dibujar(self,surface):
-        pg.draw.rect(surface,self.color,(self.pos_x, self.pos_y ,self.w,self.h) )
+       pg.draw.rect(surface,self.color,(self.pos_x-(self.w//2), self.pos_y-(self.h//2) ,self.w,self.h) )
 
-    def mover(self,teclado_arriba,teclado_abajo):
+    def mover(self,teclado_arriba,teclado_abajo,y_max=600,y_min=0):
         estado_teclado = pg.key.get_pressed()
 
-        if estado_teclado[teclado_arriba] == True and self.pos_y >= 0+(self.h//2):
+        if estado_teclado[teclado_arriba] == True and self.pos_y > y_min+(self.h//2):
             self.pos_y -= 1
 
-        if estado_teclado[teclado_abajo] == True and self.pos_y <= 600-(self.h//2):
+        if estado_teclado[teclado_abajo] == True and self.pos_y < y_max-(self.h//2):
             self.pos_y += 1
 
     @property
@@ -95,4 +95,17 @@ class Pelota:
     
     @property
     def abajo(self):
-        return self.pos_y + self.radio     
+        return self.pos_y + self.radio   
+
+    def comprobar_choque(self,r1,r2):
+        if self.derecha >= r2.izquierda and\
+            self.izquierda <= r2.derecha and\
+            self.abajo >= r2.arriba and\
+            self.arriba <= r2.abajo            :
+                self.vx *= -1
+
+        if  self.derecha >= r1.izquierda and\
+            self.izquierda <= r1.derecha and\
+            self.abajo >= r1.arriba and\
+            self.arriba <= r1.abajo            :
+                self.vx *= -1  

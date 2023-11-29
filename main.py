@@ -11,8 +11,8 @@ tasa_refresco= pg.time.Clock()
 #creamos un objeto de la clase Pelota o instanciamos la clase pelota
 pelota = Pelota(400,300,(228, 231, 19),15)
 
-raqueta1 = Raqueta(0 ,300 )#raqueta izquierda
-raqueta2 = Raqueta(780,300 )#raqueta derecha
+raqueta1 = Raqueta(10 ,300 )#raqueta izquierda
+raqueta2 = Raqueta(790,300 )#raqueta derecha
 
 game_over = True
 
@@ -39,18 +39,7 @@ while game_over:
 
     #logica de choque
     #raqueta derecha
-    if pelota.derecha >= raqueta2.izquierda and\
-        pelota.izquierda <= raqueta2.derecha and\
-        pelota.abajo >= raqueta2.arriba and\
-        pelota.arriba <= raqueta2.abajo            :
-            pelota.vx *= -1
-
-    if pelota.derecha >= raqueta1.izquierda and\
-        pelota.izquierda <= raqueta1.derecha and\
-        pelota.abajo >= raqueta1.arriba and\
-        pelota.arriba <= raqueta1.abajo            :
-            pelota.vx *= -1
-
+    pelota.comprobar_choque(raqueta1,raqueta2)
     pelota.mostrar_marcador(pantalla_principal)
 
     pg.display.flip()
