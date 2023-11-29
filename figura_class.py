@@ -101,11 +101,19 @@ class Pelota:
         if self.derecha >= r2.izquierda and\
             self.izquierda <= r2.derecha and\
             self.abajo >= r2.arriba and\
-            self.arriba <= r2.abajo            :
+            self.arriba <= r2.abajo:            
                 self.vx *= -1
 
         if  self.derecha >= r1.izquierda and\
             self.izquierda <= r1.derecha and\
             self.abajo >= r1.arriba and\
-            self.arriba <= r1.abajo            :
+            self.arriba <= r1.abajo:            
                 self.vx *= -1  
+
+    def comprobar_choqueV2(self,*raquetas): 
+        for r in raquetas:
+            if self.derecha >= r.izquierda and\
+                self.izquierda <= r.derecha and\
+                self.abajo >= r.arriba and\
+                self.arriba <= r.abajo:
+                    self.vx *= -1           

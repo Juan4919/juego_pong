@@ -39,7 +39,7 @@ while game_over:
 
     #logica de choque
     #raqueta derecha
-    pelota.comprobar_choque(raqueta1,raqueta2)
+    pelota.comprobar_choqueV2(raqueta1,raqueta2)
     pelota.mostrar_marcador(pantalla_principal)
 
     pg.display.flip()
