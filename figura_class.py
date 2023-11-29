@@ -18,7 +18,11 @@ class Raqueta:
             self.pos_y -= 1
 
         if estado_teclado[teclado_abajo] == True and self.pos_y <= 600-(self.h//2):
-            self.pos_y += 1    
+            self.pos_y += 1
+
+            
+
+
 
 
 class Pelota:
@@ -52,4 +56,11 @@ class Pelota:
             self.contadorIzquierdo +=1
 
         if self.pos_y >= y_max or self.pos_y <=0:
-            self.vy *=-1    
+            self.vy *=-1
+
+    def mostrar_marcador(self,pantalla):
+        fuente = pg.font.Font(None,30)
+        marcador1 = fuente.render(str(self.contadorDerecho),True,(255,255,255))
+        marcador2 = fuente.render(str(self.contadorIzquierdo),True,(255,255,255))
+        pantalla.blit(marcador1,(350,50))
+        pantalla.blit(marcador2,(450,50))

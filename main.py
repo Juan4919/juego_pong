@@ -10,8 +10,10 @@ tasa_refresco= pg.time.Clock()
 
 #agregar marcadores
 #asignacion de fuente y tamaño de letra
-marcador1_font = pg.font.SysFont("Verdana",30)
-marcador2_font = pg.font.SysFont("Verdana",30)
+#marcador1_font = pg.font.SysFont("Verdana",30)
+#marcador2_font = pg.font.SysFont("Verdana",30)
+#marcador1_font = pg.font.Font(None,30)
+#marcador2_font = pg.font.Font(None,30)
 
 #creamos un objeto de la clase Pelota o instanciamos la clase pelota
 pelota = Pelota(400,300,(228, 231, 19),15)
@@ -33,6 +35,7 @@ while game_over:
 
     pantalla_principal.fill( ( 27, 149, 47 ) )
     pg.draw.line(pantalla_principal, (255,255,255), (400,0), (400,600), width=10)
+    
     raqueta1.dibujar(pantalla_principal) 
     raqueta2.dibujar(pantalla_principal)
     pelota.dibujar(pantalla_principal)
@@ -41,12 +44,13 @@ while game_over:
     raqueta2.mover(pg.K_UP,pg.K_DOWN)
     pelota.mover()
 
+    pelota.mostrar_marcador(pantalla_principal)
     #asignacion de color y texto
-    marcador1 = marcador1_font.render(str(pelota.contadorDerecho),True,(255,255,255))
-    marcador2 = marcador2_font.render(str(pelota.contadorIzquierdo),True,(255,255,255))
+    #marcador1 = marcador1_font.render(str(pelota.contadorDerecho),True,(255,255,255))
+    #marcador2 = marcador2_font.render(str(pelota.contadorIzquierdo),True,(255,255,255))
 
-    pantalla_principal.blit(marcador1,(350,50))
-    pantalla_principal.blit(marcador2,(450,50))
+    #pantalla_principal.blit(marcador1,(350,50))
+    #pantalla_principal.blit(marcador2,(450,50))
 
     pg.display.flip()
 
