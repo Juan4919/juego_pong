@@ -9,7 +9,7 @@ class Raqueta:
         self.h = h
 
     def dibujar(self,surface):
-        pg.draw.rect(surface,self.color,(self.pos_x-(self.w//2), self.pos_y-(self.h//2) ,self.w,self.h) )
+        pg.draw.rect(surface,self.color,(self.pos_x, self.pos_y ,self.w,self.h) )
 
     def mover(self,teclado_arriba,teclado_abajo):
         estado_teclado = pg.key.get_pressed()
@@ -20,7 +20,21 @@ class Raqueta:
         if estado_teclado[teclado_abajo] == True and self.pos_y <= 600-(self.h//2):
             self.pos_y += 1
 
-            
+    @property
+    def derecha(self):
+        return self.pos_x + (self.w//2)
+    
+    @property
+    def izquierda(self):
+        return self.pos_x - (self.w//2)  
+    
+    @property
+    def arriba(self):
+        return self.pos_y - (self.h//2)
+    
+    @property
+    def abajo(self):
+        return self.pos_y + (self.h//2)      
 
 
 
@@ -43,16 +57,18 @@ class Pelota:
         self.pos_x += self.vx
         self.pos_y += self.vy
         #limite derecho
-        if self.pos_x >= x_max + (5*self.radio):
-            #self.pos_x = 400
-            #self.pos_y = 300
+        if self.pos_x >= x_max + (1*self.radio):
+            self.pos_x = 400
+            self.pos_y = 300
             self.vx *=-1
+            self.vy *=-1
             self.contadorDerecho +=1
         #limite izquierdo
-        if  self.pos_x <= 0-(5*self.radio):
-            #self.pos_x = 400
-            #self.pos_y = 300
+        if  self.pos_x <= 0-(1*self.radio):
+            self.pos_x = 400
+            self.pos_y = 300
             self.vx *=-1
+            self.vy *=-1
             self.contadorIzquierdo +=1
 
         if self.pos_y >= y_max or self.pos_y <=0:
@@ -64,3 +80,19 @@ class Pelota:
         marcador2 = fuente.render(str(self.contadorIzquierdo),True,(255,255,255))
         pantalla.blit(marcador1,(350,50))
         pantalla.blit(marcador2,(450,50))
+
+    @property
+    def derecha(self):
+        return self.pos_x + self.radio
+    
+    @property
+    def izquierda(self):
+        return self.pos_x - self.radio 
+    
+    @property
+    def arriba(self):
+        return self.pos_y - self.radio
+    
+    @property
+    def abajo(self):
+        return self.pos_y + self.radio     

@@ -8,18 +8,11 @@ pg.display.set_caption("Pong")
 #definir tasa de refresco en nuestro bucle de fotogramas, fps= fotograma por segundos
 tasa_refresco= pg.time.Clock()
 
-#agregar marcadores
-#asignacion de fuente y tamaño de letra
-#marcador1_font = pg.font.SysFont("Verdana",30)
-#marcador2_font = pg.font.SysFont("Verdana",30)
-#marcador1_font = pg.font.Font(None,30)
-#marcador2_font = pg.font.Font(None,30)
-
 #creamos un objeto de la clase Pelota o instanciamos la clase pelota
 pelota = Pelota(400,300,(228, 231, 19),15)
 
-raqueta1 = Raqueta(10 ,300 )#raqueta izquierda
-raqueta2 = Raqueta(790,300 )#raqueta derecha
+raqueta1 = Raqueta(0 ,300 )#raqueta izquierda
+raqueta2 = Raqueta(780,300 )#raqueta derecha
 
 game_over = True
 
@@ -44,13 +37,21 @@ while game_over:
     raqueta2.mover(pg.K_UP,pg.K_DOWN)
     pelota.mover()
 
-    pelota.mostrar_marcador(pantalla_principal)
-    #asignacion de color y texto
-    #marcador1 = marcador1_font.render(str(pelota.contadorDerecho),True,(255,255,255))
-    #marcador2 = marcador2_font.render(str(pelota.contadorIzquierdo),True,(255,255,255))
+    #logica de choque
+    #raqueta derecha
+    if pelota.derecha >= raqueta2.izquierda and\
+        pelota.izquierda <= raqueta2.derecha and\
+        pelota.abajo >= raqueta2.arriba and\
+        pelota.arriba <= raqueta2.abajo            :
+            pelota.vx *= -1
 
-    #pantalla_principal.blit(marcador1,(350,50))
-    #pantalla_principal.blit(marcador2,(450,50))
+    if pelota.derecha >= raqueta1.izquierda and\
+        pelota.izquierda <= raqueta1.derecha and\
+        pelota.abajo >= raqueta1.arriba and\
+        pelota.arriba <= raqueta1.abajo            :
+            pelota.vx *= -1
+
+    pelota.mostrar_marcador(pantalla_principal)
 
     pg.display.flip()
 
