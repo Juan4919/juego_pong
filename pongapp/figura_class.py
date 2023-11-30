@@ -48,8 +48,6 @@ class Pelota:
         self.radio = radio
         self.vx = vx
         self.vy = vy
-        self.contadorDerecho = 0
-        self.contadorIzquierdo = 0
 
     def dibujar(self,surface):
         pg.draw.circle(surface,self.color,(self.pos_x,self.pos_y),self.radio )    
@@ -63,24 +61,21 @@ class Pelota:
             self.pos_y = 300
             self.vx *=-1
             self.vy *=-1
-            self.contadorDerecho +=1
+
+            return "right"
+
         #limite izquierdo
         if  self.pos_x <= 0-(1*self.radio):
             self.pos_x = 400
             self.pos_y = 300
             self.vx *=-1
             self.vy *=-1
-            self.contadorIzquierdo +=1
+            
+            return "left"
 
         if self.pos_y >= y_max or self.pos_y <=0:
             self.vy *=-1
 
-    def mostrar_marcador(self,pantalla):
-        fuente = pg.font.Font(None,40)
-        marcador1 = fuente.render(str(self.contadorDerecho),True,COLOR_NARANJA)
-        marcador2 = fuente.render(str(self.contadorIzquierdo),True,COLOR_NARANJA)
-        pantalla.blit(marcador1,(250,50))
-        pantalla.blit(marcador2,(550,50))
 
     @property
     def derecha(self):

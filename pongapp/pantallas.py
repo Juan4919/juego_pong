@@ -15,6 +15,9 @@ class Partida:
         self.raqueta2 = Raqueta(ANCHO-10,ALTO//2 )#raqueta derecha
 
         self.fuente = pg.font.Font(None,40) 
+        self.contadorDerecho = 0
+        self.contadorIzquierdo = 0
+        self.quienMarco=""
 
     def bucle_fotograma(self):
         game_over = True
@@ -38,12 +41,14 @@ class Partida:
             
             self.raqueta1.mover(pg.K_w,pg.K_s)
             self.raqueta2.mover(pg.K_UP,pg.K_DOWN)
-            self.pelota.mover()
+            self.quienMarco = self.pelota.mover()
+
+            
 
             #logica de choque
             #raqueta derecha
             self.pelota.comprobar_choqueV2(self.raqueta1,self.raqueta2)
-            self.pelota.mostrar_marcador(self.pantalla_principal)
+            self.mostrar_marcador()
 
             pg.display.flip()
 
@@ -65,4 +70,15 @@ class Partida:
         jugador1 = self.fuente.render("Jugador 1",True,COLOR_AZUL)
         jugador2 = self.fuente.render("Jugador 2",True,COLOR_AZUL)
         self.pantalla_principal.blit(jugador1,(210,20))
-        self.pantalla_principal.blit(jugador2,(510,20))                  
+        self.pantalla_principal.blit(jugador2,(510,20))
+
+    def mostrar_marcador(self):
+        if self.quienMarco == "right":
+            self.contadorDerecho +=1
+        elif self.quienMarco ==  "left":
+            self.contadorIzquierdo +=1  
+        self.fuente = pg.font.Font(None,40)
+        marcador1 = self.fuente.render(str(self.contadorDerecho),True,COLOR_NARANJA)
+        marcador2 = self.fuente.render(str(self.contadorIzquierdo),True,COLOR_NARANJA)
+        self.pantalla_principal.blit(marcador1,(250,50))
+        self.pantalla_principal.blit(marcador2,(550,50))                      
