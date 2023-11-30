@@ -28,3 +28,15 @@ def datosPersonales(*parametros):
 
 datosPersonales("Jose","Martinez",25,True,[1,2,3])
 """
+
+def mover_mano()->str:
+    return "Derecha"
+
+
+def recibirMano(mano):
+    if mano == "izquierda":
+        print("Zurda")
+    else:
+        print("Derecha")
+
+recibirMano( mover_mano() )            

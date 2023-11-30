@@ -1,4 +1,4 @@
-from pantallas  import Partida
+from pongapp.pantallas  import Partida
 
 juego = Partida()
 juego.bucle_fotograma()

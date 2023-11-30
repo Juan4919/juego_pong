@@ -79,10 +79,6 @@ class Pelota:
         fuente = pg.font.Font(None,40)
         marcador1 = fuente.render(str(self.contadorDerecho),True,COLOR_NARANJA)
         marcador2 = fuente.render(str(self.contadorIzquierdo),True,COLOR_NARANJA)
-        jugador1 = fuente.render("Jugador 1",True,COLOR_AZUL)
-        jugador2 = fuente.render("Jugador 2",True,COLOR_AZUL)
-        pantalla.blit(jugador1,(210,20))
-        pantalla.blit(jugador2,(510,20))
         pantalla.blit(marcador1,(250,50))
         pantalla.blit(marcador2,(550,50))
 
