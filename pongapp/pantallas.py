@@ -14,7 +14,7 @@ class Partida:
         self.raqueta1 = Raqueta(10 ,ALTO//2 )#raqueta izquierda
         self.raqueta2 = Raqueta(ANCHO-10,ALTO//2 )#raqueta derecha
 
-        self.fuente = pg.font.Font(None,40) 
+        self.fuente = pg.font.Font('pongapp/fonts/PressStart2P-Regular.ttf',40) 
         self.contadorDerecho = 0
         self.contadorIzquierdo = 0
         self.quienMarco=""
