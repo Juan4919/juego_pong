@@ -28,7 +28,7 @@ def datosPersonales(*parametros):
 
 datosPersonales("Jose","Martinez",25,True,[1,2,3])
 """
-
+"""
 def mover_mano()->str:
     return "Derecha"
 
@@ -40,3 +40,16 @@ def recibirMano(mano):
         print("Derecha")
 
 recibirMano( mover_mano() )            
+"""
+
+def nombres(apellido):
+    return "Jose Alfredo "+apellido
+
+def apellidos(apellidos):
+    return apellidos
+
+nombres_apellidos = nombres( apellidos("Perez Ruiz") )
+print(nombres_apellidos)
+
+
+

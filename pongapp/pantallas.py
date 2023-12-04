@@ -135,4 +135,38 @@ class Partida:
             self.pantalla_principal.fill(FONDO_ROJO) 
         else:
             self.pantalla_principal.fill( COLOR_CANCHA )            
-        """    
+        """
+
+class Menu:
+     pg.init()
+     def __init__(self):
+        self.pantalla_principal= pg.display.set_mode( (ANCHO,ALTO) )
+        pg.display.set_caption("Menu")
+        self.tasa_refresco= pg.time.Clock()
+        self.imagenFondo = pg.image.load("pongapp/images/fondo.png")
+        self.fuente = pg.font.Font(FUENTE2,20)  
+
+     def bucle_pantalla(self):
+        game_over=True
+        while game_over:
+            for evento in pg.event.get():
+                if evento.type == pg.QUIT:
+                    game_over = False
+                """
+                if evento.type == pg.KEYDOWN:    
+                    if evento.key == pg.K_RETURN:
+                        print("precionaste enter")
+                """
+            enter = pg.key.get_pressed()
+            if enter[pg.K_RETURN]:
+                #game_over = False
+                return "partida"       
+
+            self.pantalla_principal.blit(self.imagenFondo,(0,0))
+
+            texto_menu = self.fuente.render("Pulsa ENTER para jugar",True,COLOR_AMARILLO)
+            self.pantalla_principal.blit(texto_menu,(200,ALTO//2))
+
+            pg.display.flip()
+        pg.quit()              
+
