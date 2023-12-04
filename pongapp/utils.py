@@ -11,3 +11,5 @@ TIEMPO_JUEGO=20000
 COLOR_ROJO= (185,23,36) 
 FONDO_ROJO=(250,16,34)
 FONDO_NARANJA=(250,103,12)
+FUENTE1='pongapp/fonts/RussoOne.ttf'
+FUENTE2='pongapp/fonts/PressStart2P.ttf'
