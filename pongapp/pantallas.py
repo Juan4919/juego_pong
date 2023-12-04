@@ -95,11 +95,11 @@ class Partida:
                 self.game_over = False
 
                 if self.contadorDerecho > self.contadorIzquierdo:
-                    return "Gana Jugador 1"
+                    return f"Gana Jugador 1:  \nresultado = Jugador1:{self.contadorDerecho} , Jugador2:{self.contadorIzquierdo}"
                 elif self.contadorDerecho < self.contadorIzquierdo:
-                    return "Gana el Jugador 2"
+                    return f"Gana el Jugador 2: \nresultado = Jugador1:{self.contadorDerecho} , Jugador2:{self.contadorIzquierdo}"
                 else:
-                    return "Empate entre Jugador 1 y Jugador 2"
+                    return f"Empate entre Jugador 1 y Jugador 2 \nresultado = Jugador1:{self.contadorDerecho} , Jugador2:{self.contadorIzquierdo}"
 
 
             #finalizacion de juego por puntos
@@ -184,7 +184,7 @@ class Resultado:
         self.pantalla_principal = pg.display.set_mode((ANCHO,ALTO))
         pg.display.set_caption("Resultado")
         self.tasa_refresco= pg.time.Clock()
-        self.fuenteResultado = pg.font.Font(FUENTE1,20)
+        self.fuenteResultado = pg.font.Font(FUENTE1,18)
         self.resultado = resultado
 
     def bucle_pantalla(self):
@@ -196,7 +196,7 @@ class Resultado:
 
             self.pantalla_principal.fill(COLOR_BLANCO)
             texto_resultado = self.fuenteResultado.render( str(self.resultado) ,True,COLOR_GRANATE)
-            self.pantalla_principal.blit(texto_resultado,(200,ALTO//2))
+            self.pantalla_principal.blit(texto_resultado,(120,ALTO//2))
             pg.display.flip()
 
         pg.quit()            
