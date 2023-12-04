@@ -92,16 +92,24 @@ class Partida:
             #finalizacion del juego por tiempo
             if self.temporizador <= 0:
                 print("fin del juego")
-                self.game_over = False          
+                self.game_over = False
+
+                if self.contadorDerecho > self.contadorIzquierdo:
+                    return "Gana Jugador 1"
+                elif self.contadorDerecho < self.contadorIzquierdo:
+                    return "Gana el Jugador 2"
+                else:
+                    return "Empate entre Jugador 1 y Jugador 2"
+
 
             #finalizacion de juego por puntos
             if self.contadorDerecho == 7:
                 self.game_over = False
-                print("El ganador es el Jugador 1")
+                return "El ganador es el Jugador 1"
 
             if self.contadorIzquierdo ==7:
                 self.game_over = False
-                print("El ganador es el Jugador 2")
+                return "El ganador es el Jugador 2"
 
     def mostrar_temporizador(self):
         tiempo_juego = self.fuente.render(str( int( self.temporizador/1000) ),True,COLOR_ROJO)
@@ -138,8 +146,8 @@ class Partida:
         """
 
 class Menu:
-     pg.init()
      def __init__(self):
+        pg.init()
         self.pantalla_principal= pg.display.set_mode( (ANCHO,ALTO) )
         pg.display.set_caption("Menu")
         self.tasa_refresco= pg.time.Clock()
@@ -170,3 +178,25 @@ class Menu:
             pg.display.flip()
         pg.quit()              
 
+class Resultado:
+    def __init__(self,resultado):
+        pg.init()
+        self.pantalla_principal = pg.display.set_mode((ANCHO,ALTO))
+        pg.display.set_caption("Resultado")
+        self.tasa_refresco= pg.time.Clock()
+        self.fuenteResultado = pg.font.Font(FUENTE1,20)
+        self.resultado = resultado
+
+    def bucle_pantalla(self):
+        game_over=True
+        while game_over:
+            for evento in pg.event.get():
+                if evento.type == pg.QUIT:
+                    game_over = False    
+
+            self.pantalla_principal.fill(COLOR_BLANCO)
+            texto_resultado = self.fuenteResultado.render( str(self.resultado) ,True,COLOR_GRANATE)
+            self.pantalla_principal.blit(texto_resultado,(200,ALTO//2))
+            pg.display.flip()
+
+        pg.quit()            
