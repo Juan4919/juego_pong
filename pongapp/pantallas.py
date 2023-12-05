@@ -95,27 +95,12 @@ class Partida:
         self.pantalla_principal.blit(marcador2,(550,SIZE_FUENTE_2+30))
 
     def finalizacion_de_juego(self):
-            #finalizacion del juego por tiempo
-            if self.temporizador <= 0:
-                print("fin del juego")
-                #self.game_over = False
-
-                if self.contadorDerecho > self.contadorIzquierdo:
-                    self.resultado_partida= f"Gana Jugador 1:  resultado = Jugador1:{self.contadorDerecho} , Jugador2:{self.contadorIzquierdo}"
-                elif self.contadorDerecho < self.contadorIzquierdo:
-                    self.resultado_partida= f"Gana el Jugador 2: resultado = Jugador1:{self.contadorDerecho} , Jugador2:{self.contadorIzquierdo}"
-                else:
-                    self.resultado_partida= f"Empate entre Jugador 1 y Jugador 2 resultado = Jugador1:{self.contadorDerecho} , Jugador2:{self.contadorIzquierdo}"
-
-
-            #finalizacion de juego por puntos
-            if self.contadorDerecho == 7:
-                #self.game_over = False
-                self.resultado_partida= "El ganador es el Jugador 1"
-
-            if self.contadorIzquierdo ==7:
-                #self.game_over = False
-                self.resultado_partida= "El ganador es el Jugador 2"
+        if self.contadorDerecho > self.contadorIzquierdo:
+            self.resultado_partida= f"Gana Jugador 1:  resultado = Jugador1:{self.contadorDerecho} , Jugador2:{self.contadorIzquierdo}"
+        elif self.contadorIzquierdo > self.contadorDerecho:
+            self.resultado_partida= f"Gana el Jugador 2: resultado = Jugador1:{self.contadorDerecho} , Jugador2:{self.contadorIzquierdo}"
+        else:
+            self.resultado_partida= f"Empate entre Jugador 1 y Jugador 2 resultado = Jugador1:{self.contadorDerecho} , Jugador2:{self.contadorIzquierdo}"  
 
     def mostrar_temporizador(self):
         tiempo_juego = self.fuente.render(str( int( self.temporizador/1000) ),True,COLOR_ROJO)
