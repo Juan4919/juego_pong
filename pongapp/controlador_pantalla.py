@@ -9,11 +9,23 @@ class PantallaControlador:
         self.resultado_final=""
 
     def start(self):
+        cerrar=""
         while True:
-            self.menu.bucle_pantalla()
-            self.resultado_final = self.partida.bucle_fotograma()
+
+            cerrar = self.menu.bucle_pantalla()
+            if cerrar == True:
+                break
+            cerrar = self.partida.bucle_fotograma()
+            if cerrar == True:
+                break
+            else:
+                self.resultado_final = cerrar
+
             self.resultado.cargar_resultado(self.resultado_final)
-            self.resultado.bucle_pantalla()
+            
+            cerrar= self.resultado.bucle_pantalla()
+            if cerrar == True:
+                break
 
         """
         while True:

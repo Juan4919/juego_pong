@@ -1,4 +1,3 @@
-import pygame as pg
 from pongapp.figura_class import Pelota,Raqueta
 from pongapp.utils import*
 
@@ -37,10 +36,10 @@ class Partida:
         while self.game_over and (self.contadorDerecho < 7 or self.contadorIzquierdo < 7) and self.temporizador > 0:
             self.valor_tasa = self.tasa_refresco.tick(VELOCIDAD_JUEGO)
             self.temporizador = self.temporizador -  self.valor_tasa
-
+            self.finalizacion_de_juego()
             for evento in pg.event.get():
                 if evento.type == pg.QUIT:
-                    self.game_over = False
+                   return True
             
             
             color = self.fijar_fondo() 
@@ -60,7 +59,7 @@ class Partida:
             self.pelota.comprobar_choqueV2(self.raqueta1,self.raqueta2)
             self.mostrar_marcador()
             self.mostrar_temporizador()
-            self.finalizacion_de_juego()
+           
 
             pg.display.flip()
 
@@ -168,7 +167,7 @@ class Menu:
             pg.mixer.Sound.play(self.sonido)
             for evento in pg.event.get():
                 if evento.type == pg.QUIT:
-                    game_over = False
+                    return True
 
             botones = pg.key.get_pressed()
             if botones[pg.K_RETURN]:
@@ -203,13 +202,8 @@ class Resultado:
         while game_over:
             for evento in pg.event.get():
                 if evento.type == pg.QUIT:
-                    game_over = False    
-
-            botones = pg.key.get_pressed()
-            """
-            if botones[pg.K_RETURN]:
-                return True
-            """
+                    game_over = False
+            
             self.pantalla_principal.fill(COLOR_BLANCO)
             texto_resultado = self.fuenteResultado.render( str(self.resultado) ,True,COLOR_GRANATE)
             self.pantalla_principal.blit(texto_resultado,(120,ALTO//2))
@@ -234,7 +228,7 @@ class Record:
         while game_over:
             for evento in pg.event.get():
                 if evento.type == pg.QUIT:    
-                    game_over==False
+                    return True
             self.pantalla_principal.fill(COLOR_BLANCO)
             texto= self.fuenteRecord.render("Mejores Puntajes",0,COLOR_GRANATE) 
 
