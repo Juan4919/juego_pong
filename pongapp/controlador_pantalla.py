@@ -26,17 +26,3 @@ class PantallaControlador:
             cerrar= self.resultado.bucle_pantalla()
             if cerrar == True:
                 break
-
-        """
-        while True:
-            valor = self.menu.bucle_pantalla()
-
-            if valor == "partida":
-                self.partida.bucle_fotograma()
-                resultado_partida =  self.partida.finalizacion_de_juego()
-                if resultado_partida != "":
-                    resultado = Resultado(resultado_partida)
-                    resultado.bucle_pantalla()  
-            elif valor =="record":
-                self.record.bucle_pantalla()
-        """

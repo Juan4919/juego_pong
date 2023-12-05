@@ -8,16 +8,38 @@ class Raqueta:
         self.w = w
         self.h = h
         self.raqueta = None
-        self.imagenes = {
-            "drcha":"pongapp/images/raquetas/electric00_drcha.png",
-            "izqda":"pongapp/images/raquetas/electric00_izqda.png"
+        self.file_imagenes = {
+            "drcha":["electric00_drcha.png","electric01_drcha.png","electric02_drcha.png"],
+            "izqda":["electric00_izqda.png","electric01_izqda.png","electric02_izqda.png"]
         }
+        self.imagenes= self.cargar_imagenes()#llamar al metodo que devuelve la incializacion de imagenes
+        self._direccion = ''  #variable para asignar direccion
+        self.imagen_activa = 0 #variable para indicar repeticion
+
+    def cargar_imagenes(self):
+        imagenprueba={}
+        for lado in self.file_imagenes:
+            imagenprueba[lado]=[]
+            for nombre_fichero in self.file_imagenes[lado]:
+                imagen = pg.image.load(f"pongapp/images/raquetas/{nombre_fichero}")
+                imagenprueba[lado].append(imagen)
+        return imagenprueba        
 
 
-    def dibujar(self,surface,lado):
-        self.raqueta = pg.image.load( self.imagenes[lado] )
-        surface.blit(self.raqueta,( self.pos_x-(self.w//2),self.pos_y-(self.h//2) ) )
-        #pg.draw.rect(surface,self.color,(self.pos_x-(self.w//2), self.pos_y-(self.h//2) ,self.w,self.h) )
+    @property    
+    def direccion(self):
+        return self._direccion
+    
+    @direccion.setter
+    def direccion(self,valor):
+        self._direccion = valor
+        
+
+    def dibujar(self,surface):
+        surface.blit(self.imagenes[self.direccion][self.imagen_activa],( self.pos_x-(self.w//2),self.pos_y-(self.h//2) ))
+        self.imagen_activa +=1
+        if self.imagen_activa >= len(self.imagenes[self.direccion]):
+            self.imagen_activa = 0
 
     def mover(self,teclado_arriba,teclado_abajo,y_max=ALTO,y_min=ALTO_MIN):
         estado_teclado = pg.key.get_pressed()
@@ -122,5 +144,6 @@ class Pelota:
                 self.izquierda <= r.derecha and\
                 self.abajo >= r.arriba and\
                 self.arriba <= r.abajo:
+                    pg.mixer.Sound.play(self.sonido)  
                     self.vx *= -1
-                    pg.mixer.Sound.play(self.sonido)           
+                            
