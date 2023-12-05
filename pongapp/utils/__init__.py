@@ -27,3 +27,4 @@ SIZE_FUENTE_1=15
 SIZE_FUENTE_2=20
 SONIDO_AMBIENTE="pongapp/songs/menu.mp3"
 SONIDO_PELOTA='pongapp/songs/pelota.mp3'
+IMG_PELOTA="pongapp/images/pelotas/pelota2.png"

@@ -11,7 +11,7 @@ class Partida:
 
         self.pelota = Pelota(ANCHO//2,ALTO//2,COLOR_PELOTA)
         self.raqueta1 = Raqueta(10 ,ALTO//2 )#raqueta izquierda
-        self.raqueta2 = Raqueta(ANCHO-10,ALTO//2 )#raqueta derecha
+        self.raqueta2 = Raqueta(ANCHO-20,ALTO//2 )#raqueta derecha
 
         self.fuente = pg.font.Font(FUENTE1,SIZE_FUENTE_2)  
         self.fuenteTwo = pg.font.Font(FUENTE2,SIZE_FUENTE_2)
@@ -47,8 +47,8 @@ class Partida:
 
             self.mostrar_linea_central()
             
-            self.raqueta1.dibujar(self.pantalla_principal) 
-            self.raqueta2.dibujar(self.pantalla_principal)
+            self.raqueta1.dibujar(self.pantalla_principal,"izqda") 
+            self.raqueta2.dibujar(self.pantalla_principal,"drcha")
             self.pelota.dibujar(self.pantalla_principal)
             self.mostrar_jugadores()
             
@@ -66,14 +66,7 @@ class Partida:
         return self.resultado_partida
        
 
-    def mostrar_linea_central(self):
-            """
-            cont_linea = 0
-            while cont_linea <= 600:
-                pg.draw.line(self.pantalla_principal, COLOR_BLANCO, (400,cont_linea), (400,cont_linea+50), width=10)
-                cont_linea += 70
-            """
-            
+    def mostrar_linea_central(self):            
             for cont_linea in range(0,ALTO+1,70):    
                 pg.draw.line(self.pantalla_principal,COLOR_BLANCO,(ANCHO//2,cont_linea),(ANCHO//2,cont_linea+50),width=10) 
 
@@ -126,15 +119,6 @@ class Partida:
                 self.contadorFotograma=0  
         
         return self.colorFondo
-    
-        """
-        if self.temporizador < 10000 and self.temporizador > 5000:
-            self.pantalla_principal.fill( FONDO_NARANJA )
-        elif self.temporizador < 5000:
-            self.pantalla_principal.fill(FONDO_ROJO) 
-        else:
-            self.pantalla_principal.fill( COLOR_CANCHA )            
-        """
 
 class Menu:
      def __init__(self):
@@ -144,12 +128,13 @@ class Menu:
         self.tasa_refresco= pg.time.Clock()
         self.imagenFondo = pg.image.load(IMG_FONDO)
         self.fuente = pg.font.Font(FUENTE2,18) 
-        self.sonido = pg.mixer.Sound(SONIDO_AMBIENTE) 
+        self.sonido = pg.mixer.Sound(SONIDO_AMBIENTE)#definimos el sonido con el path del archivo 
 
      def bucle_pantalla(self):
         game_over=True
         while game_over:
-            pg.mixer.Sound.play(self.sonido)
+            pg.mixer.Sound.set_volume(self.sonido, 0.02)#controlando el volumen del sonido
+            pg.mixer.Sound.play(self.sonido)#activamos el sonido
             for evento in pg.event.get():
                 if evento.type == pg.QUIT:
                     return True
@@ -157,7 +142,7 @@ class Menu:
             botones = pg.key.get_pressed()
             if botones[pg.K_RETURN]:
                 #game_over = False
-                pg.mixer.Sound.stop(self.sonido)
+                pg.mixer.Sound.stop(self.sonido)#paramos el sonido
                 return "partida"
             elif botones[pg.K_r]:
                 pg.mixer.Sound.stop(self.sonido)

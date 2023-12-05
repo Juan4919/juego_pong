@@ -7,9 +7,17 @@ class Raqueta:
         self.color = color
         self.w = w
         self.h = h
+        self.raqueta = None
+        self.imagenes = {
+            "drcha":"pongapp/images/raquetas/electric00_drcha.png",
+            "izqda":"pongapp/images/raquetas/electric00_izqda.png"
+        }
 
-    def dibujar(self,surface):
-       pg.draw.rect(surface,self.color,(self.pos_x-(self.w//2), self.pos_y-(self.h//2) ,self.w,self.h) )
+
+    def dibujar(self,surface,lado):
+        self.raqueta = pg.image.load( self.imagenes[lado] )
+        surface.blit(self.raqueta,( self.pos_x-(self.w//2),self.pos_y-(self.h//2) ) )
+        #pg.draw.rect(surface,self.color,(self.pos_x-(self.w//2), self.pos_y-(self.h//2) ,self.w,self.h) )
 
     def mover(self,teclado_arriba,teclado_abajo,y_max=ALTO,y_min=ALTO_MIN):
         estado_teclado = pg.key.get_pressed()
@@ -48,9 +56,11 @@ class Pelota:
         self.vx = vx
         self.vy = vy
         self.sonido = pg.mixer.Sound(SONIDO_PELOTA)
+        self.pelota = pg.image.load(IMG_PELOTA)
 
     def dibujar(self,surface):
-        pg.draw.circle(surface,self.color,(self.pos_x,self.pos_y),self.radio )    
+        #pg.draw.circle(surface,self.color,(self.pos_x,self.pos_y),self.radio )
+        surface.blit(self.pelota,(self.pos_x,self.pos_y) )   
 
     def mover(self,x_max=800,y_max=600):
         self.pos_x += self.vx
