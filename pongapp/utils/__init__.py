@@ -1,3 +1,7 @@
+import pygame as pg
+
+pg.init()
+
 ANCHO=800
 ALTO=600
 ANCHO_MIN=0
@@ -14,10 +18,12 @@ FONDO_ROJO=(250,16,34)
 FONDO_NARANJA=(250,103,12)
 FUENTE1='pongapp/fonts/RussoOne.ttf'
 FUENTE2='pongapp/fonts/PressStart2P.ttf'
-TIEMPO_JUEGO=6000
+TIEMPO_JUEGO=12000
 VELOCIDAD_JUEGO=300
 TIEMPO_LIMIT_1=10000
 TIEMPO_LIMIT_2=5000
 IMG_FONDO="pongapp/images/fondo.png"
 SIZE_FUENTE_1=15
 SIZE_FUENTE_2=20
+SONIDO_AMBIENTE="pongapp/songs/menu.mp3"
+SONIDO_PELOTA='pongapp/songs/pelota.mp3'
